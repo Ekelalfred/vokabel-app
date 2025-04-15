@@ -13,8 +13,8 @@
           "length": null,
           "mappedType": "integer"
         },
-        "full_name": {
-          "name": "full_name",
+        "username": {
+          "name": "username",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -39,6 +39,267 @@
       ],
       "checks": [],
       "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "session_date": {
+          "name": "session_date",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "datetime"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "session",
+      "indexes": [
+        {
+          "columnNames": [
+            "user_id"
+          ],
+          "composite": false,
+          "keyName": "session_user_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "session_user_id_foreign": {
+          "constraintName": "session_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "session",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "meaning": {
+          "name": "meaning",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "text"
+        },
+        "forms": {
+          "name": "forms",
+          "type": "json",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "json"
+        },
+        "used_in_session_id": {
+          "name": "used_in_session_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "failed_in_session_id": {
+          "name": "failed_in_session_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "word",
+      "indexes": [
+        {
+          "columnNames": [
+            "used_in_session_id"
+          ],
+          "composite": false,
+          "keyName": "word_used_in_session_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "failed_in_session_id"
+          ],
+          "composite": false,
+          "keyName": "word_failed_in_session_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "word_used_in_session_id_foreign": {
+          "constraintName": "word_used_in_session_id_foreign",
+          "columnNames": [
+            "used_in_session_id"
+          ],
+          "localTableName": "word",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "session",
+          "updateRule": "cascade"
+        },
+        "word_failed_in_session_id_foreign": {
+          "constraintName": "word_failed_in_session_id_foreign",
+          "columnNames": [
+            "failed_in_session_id"
+          ],
+          "localTableName": "word",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "session",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "text"
+        },
+        "words_id": {
+          "name": "words_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "language",
+      "indexes": [
+        {
+          "columnNames": [
+            "words_id"
+          ],
+          "composite": false,
+          "keyName": "language_words_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "language_words_id_foreign": {
+          "constraintName": "language_words_id_foreign",
+          "columnNames": [
+            "words_id"
+          ],
+          "localTableName": "language",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "word",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     }
   ],

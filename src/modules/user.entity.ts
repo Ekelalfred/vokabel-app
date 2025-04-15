@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Session } from './session.entity';
 
 @Entity()
 export class User {
@@ -7,6 +8,8 @@ export class User {
    id!: number;
 
    @Property()
-   fullName!: string;
+   username!: string;
 
+   @OneToMany(() => Session, session => session.user)
+   sessions = new Collection<Session>(this);
 }

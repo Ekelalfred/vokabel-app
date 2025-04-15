@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 async function postUser(_: IpcMainEvent, username: string) {
   const em = orm.em.fork();
   const user = new User();
-  user.fullName = username;
+  user.username = username;
   em.persist(user);
   await em.flush();
 }
