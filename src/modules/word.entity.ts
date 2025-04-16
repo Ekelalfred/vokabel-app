@@ -1,6 +1,6 @@
-import { Cascade, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { Language } from './language.entity';
-import { Session } from 'inspector/promises';
+import { Session } from './session.entity';
 
 @Entity()
 export class Word {
