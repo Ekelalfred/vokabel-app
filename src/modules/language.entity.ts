@@ -1,15 +1,17 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity, Collection, EntitySchema } from '@mikro-orm/core';
 import { Word } from './word.entity.js';
 
-@Entity()
-export class Language {
-
-    @PrimaryKey()
-    id!: number;
-
-    @Property()
-    name!: string;
-
-    @ManyToOne(() => Word)
-    words!: Word;
+export interface Language extends BaseEntity {
+    id: number,
+    name: string,
+    words: Collection<Word>,
 }
+
+export const language_schema = new EntitySchema<Language>({
+    name: 'Language',
+    properties: {
+        id: { type: 'bigint', primary: true },
+        name: { type: 'string' },
+        words: { kind: '1:m', entity: 'Word', mappedBy: 'language' },
+    }
+});

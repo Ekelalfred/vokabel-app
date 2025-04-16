@@ -1,15 +1,20 @@
-import { Collection, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity, Collection, EntitySchema } from '@mikro-orm/core';
 import { Session } from './session.entity.js';
+import { Word } from './word.entity.js';
 
-@Entity()
-export class User {
-
-   @PrimaryKey()
-   id!: number;
-
-   @Property()
-   username!: string;
-
-   @OneToMany(() => Session, session => session.user)
-   sessions = new Collection<Session>(this);
+export interface User extends BaseEntity {
+    id: number,
+    username: string,
+    sessions: Collection<Session>,
+    activated_words: Collection<Word>,
 }
+
+export const user_schema = new EntitySchema<User>({
+    name: 'User',
+    properties: {
+        id: { type: 'bigint', primary: true },
+        username: { type: 'string' },
+        sessions: { kind: '1:m', entity: 'Session', mappedBy: 'user' },
+        activated_words: { kind: 'm:n', entity: 'Word', inversedBy: 'activated_by' }
+    }
+});

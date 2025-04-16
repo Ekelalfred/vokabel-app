@@ -4,8 +4,7 @@
   "main": "dist/out-tsc/main.js",
   "scripts": {
     "ng": "ng",
-    "start": "tsc && mikro-orm cache:generate --ts --combined && ng build && electron-forge start",
-    "start-ang": "tsc && ng build && electron-forge start",
+    "start": "tsc && ng build && electron-forge start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
