@@ -1,3 +1,8 @@
 <nav>
-    
+    <div class="dropdown">
+        <div class="dropdown-button">{{ currentUser || "Select a user" }}</div>
+        <div class="dropdown-content">
+            <div *ngFor="let option of options" class="option" (click)="selectUser(option)">{{ option }}</div>
+        </div>
+    </div>
 </nav>

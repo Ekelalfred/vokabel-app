@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { Language } from './language.entity';
-import { Session } from './session.entity';
+import { Language } from './language.entity.js';
+import { Session } from './session.entity.js';
 
 @Entity()
 export class Word {

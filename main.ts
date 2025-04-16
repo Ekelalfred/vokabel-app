@@ -4,6 +4,9 @@ import { GeneratedCacheAdapter } from "@mikro-orm/core";
 import * as fs from "fs";
 import { MikroORM } from "@mikro-orm/sqlite";
 import { User } from "./src/modules/user.entity.js";
+import { Language } from "./src/modules/language.entity.js";
+import { Word } from "./src/modules/word.entity.js";
+import { Session } from "./src/modules/session.entity.js";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -41,7 +44,7 @@ app.on('window-all-closed', () => {
 
 const orm = await MikroORM.init({
   dbName: "vokabel.db",
-  entities: [User],
+  entities: [User, Language, Word, Session],
   metadataCache: {
     enabled: true,
     adapter: GeneratedCacheAdapter,

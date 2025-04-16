@@ -1,5 +1,5 @@
 import { Collection, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { Session } from './session.entity';
+import { Session } from './session.entity.js';
 
 @Entity()
 export class User {
