@@ -7,6 +7,7 @@ export interface User extends BaseEntity {
     username: string,
     sessions: Collection<Session>,
     activated_words: Collection<Word>,
+    active: boolean,
 }
 
 export const user_schema = new EntitySchema<User>({
@@ -15,6 +16,7 @@ export const user_schema = new EntitySchema<User>({
         id: { type: 'bigint', primary: true },
         username: { type: 'string' },
         sessions: { kind: '1:m', entity: 'Session', mappedBy: 'user' },
-        activated_words: { kind: 'm:n', entity: 'Word', inversedBy: 'activated_by' }
+        activated_words: { kind: 'm:n', entity: 'Word', inversedBy: 'activated_by' },
+        active: { type: 'boolean', default: false },
     }
 });

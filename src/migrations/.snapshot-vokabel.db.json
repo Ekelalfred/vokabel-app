@@ -62,6 +62,17 @@
           "nullable": false,
           "length": null,
           "mappedType": "text"
+        },
+        "active": {
+          "name": "active",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "false",
+          "mappedType": "integer"
         }
       },
       "name": "user",
