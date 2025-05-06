@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { DropdownService } from '../../services/dropdown.service';
+import { Component, OnDestroy } from '@angular/core';
+import { StateService, StateServiceKeys } from '../../services/state.service';
+import { User } from '../../../modules/user.entity';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +10,24 @@ import { DropdownService } from '../../services/dropdown.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
-  currentUser: string | null = null;
-  options: string[] = ["Option 1", "A lot more text in this one", "Option 3"];
+export class NavbarComponent implements OnDestroy {
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private dropdownService: DropdownService) {
-    this.dropdownService.selectedOption$.subscribe(option => {
-      this.currentUser = option;
+  currentUser: User | null = null;
+  options: User[] = [{ username: "Option 1" }, { username: "A lot more text in this one" }, { username: "Option 3" }] as User[];
+
+  constructor(private stateService: StateService) {
+    this.stateService.getProperty<User>(StateServiceKeys.SELECTED_USER).pipe(takeUntil(this.unsubscribe$)).subscribe(user => {
+      this.currentUser = user;
     });
   }
 
-  public selectUser(username: string): void {
-    this.dropdownService.setSelectedOption(username);
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  public selectUser(user: User): void {
+    this.stateService.setProperty<User>(StateServiceKeys.SELECTED_USER, user);
   }
 }

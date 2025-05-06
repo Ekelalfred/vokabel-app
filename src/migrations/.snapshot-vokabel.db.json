@@ -73,10 +73,30 @@
           "length": null,
           "default": "false",
           "mappedType": "integer"
+        },
+        "activated_language_id": {
+          "name": "activated_language_id",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "mappedType": "bigint"
         }
       },
       "name": "user",
       "indexes": [
+        {
+          "columnNames": [
+            "activated_language_id"
+          ],
+          "composite": false,
+          "keyName": "user_activated_language_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
         {
           "keyName": "primary",
           "columnNames": [
@@ -89,7 +109,21 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "user_activated_language_id_foreign": {
+          "constraintName": "user_activated_language_id_foreign",
+          "columnNames": [
+            "activated_language_id"
+          ],
+          "localTableName": "user",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "language",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {

@@ -1,11 +1,12 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20250505115354 extends Migration {
+export class Migration20250506072538 extends Migration {
 
   override async up(): Promise<void> {
     this.addSql(`create table \`language\` (\`id\` integer not null primary key autoincrement, \`name\` text not null);`);
 
-    this.addSql(`create table \`user\` (\`id\` integer not null primary key autoincrement, \`username\` text not null, \`active\` integer not null default false);`);
+    this.addSql(`create table \`user\` (\`id\` integer not null primary key autoincrement, \`username\` text not null, \`active\` integer not null default false, \`activated_language_id\` bigint null, constraint \`user_activated_language_id_foreign\` foreign key(\`activated_language_id\`) references \`language\`(\`id\`) on delete set null on update cascade);`);
+    this.addSql(`create index \`user_activated_language_id_index\` on \`user\` (\`activated_language_id\`);`);
 
     this.addSql(`create table \`session\` (\`id\` integer not null primary key autoincrement, \`session_date\` datetime not null, \`user_id\` bigint not null, constraint \`session_user_id_foreign\` foreign key(\`user_id\`) references \`user\`(\`id\`) on update cascade);`);
     this.addSql(`create index \`session_user_id_index\` on \`session\` (\`user_id\`);`);

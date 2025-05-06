@@ -1,8 +1,8 @@
 <div class="nav">
     <div class="dropdown">
-        <div class="dropdown-text">{{ currentUser || "Select a user" }}</div>
+        <div class="dropdown-text">{{ currentUser?.username || "Select a user" }}</div>
         <div class="dropdown-content">
-            <div *ngFor="let option of options" class="option" (click)="selectUser(option)">{{ option }}</div>
+            <div *ngFor="let option of options" class="option" (click)="selectUser(option)">{{ option.username }}</div>
         </div>
     </div>
 </div>
