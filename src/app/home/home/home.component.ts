@@ -30,8 +30,16 @@ export class HomeComponent {
     this.router.navigateByUrl("/");
   }
 
-  public rerouteToNewEntity(params = null): void {
-    this.router.navigateByUrl("/entities");
+  public rerouteToNewEntity(options: { backButton?: boolean, entity?: string } = {}): void {
+    const {
+      backButton = true,
+      entity = null
+    } = options;
+    if (entity) {
+      this.router.navigateByUrl(`/entities?backButton=${ backButton }&entity=${ entity }`);
+    } else {
+      this.router.navigateByUrl(`/entities?backButton=${ backButton }`);
+    }
   }
 
   public rerouteToSessionHistory(): void {

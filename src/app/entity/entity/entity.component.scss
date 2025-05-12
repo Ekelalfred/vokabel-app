@@ -1,0 +1,12 @@
+.vertical-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.horizontal-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
