@@ -18,6 +18,13 @@ async function postUser(_: IpcMainEvent, username: string) {
   await em.flush();
 }
 
+async function postLanguage(_: IpcMainEvent, language_name: string) {
+  const em = orm.em.fork();
+  const language = em.create<Language>('Language', { name: language_name });
+  em.persist(language);
+  await em.flush();
+}
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1920,
@@ -31,6 +38,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   ipcMain.on('api:post-user', postUser);
+  ipcMain.on('api:post-language', postLanguage);
   createWindow();
 });
 

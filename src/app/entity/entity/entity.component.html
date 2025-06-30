@@ -1,5 +1,20 @@
 <div class="vertical-wrapper">
-    <div *ngIf="true">
+    <div [ngSwitch]="entity" class="vertical-wrapper">
+        <ng-container *ngSwitchCase="'word'">
+            <label for="meaning">Übersetzung</label>
+            <input name="meaning" />
+            <label for="forms">Formen</label>
+            <input name="forms" />
+        </ng-container>
+        <ng-container *ngSwitchCase="'language'">
+            <label for="language_name">Sprache</label>
+            <input name="language_name" />
+        </ng-container>
+        <ng-container *ngSwitchCase="'user'">
+            <label for="user_name">Username</label>
+            <input name="user_name" />
+        </ng-container>
+    </div>
     <div class="horizontal-wrapper">
         <button class="btn" type="button" (click)="rerouteToHome()">Zurück</button>
         <button class="btn" type="button" (click)="saveAndClear()">Anlegen und weiteren hinzufügen</button>
